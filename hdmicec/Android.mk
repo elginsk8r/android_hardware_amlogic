@@ -30,7 +30,7 @@ LOCAL_CFLAGS := -Werror
 
 LOCAL_MODULE_RELATIVE_PATH := hw
 
-LOCAL_SHARED_LIBRARIES := liblog libcutils
+LOCAL_SHARED_LIBRARIES := liblog libcutils libhardware
 
 LOCAL_MODULE := hdmi_cec.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_TAGS := optional
@@ -46,6 +46,7 @@ LOCAL_CFLAGS := -Wno-error -Wno-unused-parameter
 
 LOCAL_MODULE_PATH := $(TARGET_OUT)/bin
 
+LOCAL_HEADER_LIBRARIES += libhardware_headers
 LOCAL_SHARED_LIBRARIES := liblog libcutils
 
 LOCAL_MODULE := hdmicec_test
