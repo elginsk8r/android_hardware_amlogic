@@ -36,7 +36,7 @@ struct memtrack_module HAL_MODULE_INFO_SYM = {
         .module_api_version = MEMTRACK_MODULE_API_VERSION_0_1,
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = MEMTRACK_HARDWARE_MODULE_ID,
-        .name = "Yukawa Memory Tracker HAL",
+        .name = "Amlogic Memory Tracker HAL",
         .author = "The Android Open Source Project",
         .methods = &memtrack_module_methods,
     },
