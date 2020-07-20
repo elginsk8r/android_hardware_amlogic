@@ -1,4 +1,5 @@
-# Copyright (C) 2016 The Android Open Source Project
+#
+# Copyright 2017 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,38 +12,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-LOCAL_PATH := $(call my-dir)
-
-# The default audio HAL module, which is a stub, that is loaded if no other
-# device specific modules are present. The exact load order can be seen in
-# libhardware/hardware.c
 #
-# The format of the name is audio.<type>.<hardware/etc>.so where the only
-# required type is 'primary'. Other possibilites are 'a2dp', 'usb', etc.
-include $(CLEAR_VARS)
 
-LOCAL_HEADER_LIBRARIES += libhardware_headers
-LOCAL_MODULE := audio.primary.$(TARGET_BOARD_PLATFORM)
-LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_VENDOR_MODULE := true
+LOCAL_PATH:= $(call my-dir)
 
-LOCAL_SRC_FILES := audio_hw.c \
-    audio_aec.c \
-    fifo_wrapper.cpp \
-    fir_filter.c
-LOCAL_SHARED_LIBRARIES := liblog libcutils libtinyalsa libaudioroute libaudioutils
-LOCAL_CFLAGS := -Wno-unused-parameter
-LOCAL_C_INCLUDES += \
-        external/tinyalsa/include \
-        external/expat/lib \
-        $(call include-path-for, audio-route) \
-        system/media/audio_utils/include \
-        system/media/audio_effects/include
-
-ifeq ($(AUDIO_FEATURE_GOOGLE_AEC), true)
-    LOCAL_SHARED_LIBRARIES += google_aec
-    LOCAL_CFLAGS += -DAEC_HAL
+ifneq ($(filter $(LOCAL_PATH),$(PRODUCT_SOONG_NAMESPACES)),)
+include $(call first-makefiles-under,$(LOCAL_PATH))
 endif
-
-include $(BUILD_SHARED_LIBRARY)
