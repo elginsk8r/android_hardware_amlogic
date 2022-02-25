@@ -18,7 +18,8 @@
 LOCAL_PATH := $(call my-dir)
 
 # Include platform specific makefiles
-include $(if $(wildcard $(LOCAL_PATH)/Android.$(TARGET_BOARD_PLATFORM).mk), $(LOCAL_PATH)/Android.$(TARGET_BOARD_PLATFORM).mk,)
+TARGET_GRALLOC_PLATFORM ?= $(TARGET_BOARD_PLATFORM)
+include $(if $(wildcard $(LOCAL_PATH)/Android.$(TARGET_GRALLOC_PLATFORM).mk), $(LOCAL_PATH)/Android.$(TARGET_GRALLOC_PLATFORM).mk,)
 
 #
 # Static hardware defines
